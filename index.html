@@ -610,6 +610,7 @@ footer { padding: 48px 0; border-top: 1.5px solid var(--border-strong); }
   <symbol id="i-folder" viewBox="0 0 24 24"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></symbol>
   <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
   <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></symbol>
+  <symbol id="i-notes" viewBox="0 0 24 24"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></symbol>
   <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
   <symbol id="i-paste" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-.5"/><path d="M16 4h2a2 2 0 0 1 1.73 1"/><path d="M21 14H11"/><path d="m15 10-4 4 4 4"/></symbol>
   <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></symbol>
@@ -895,6 +896,11 @@ Servidor rodando em http://localhost:3000
         <h3>Agentes de IA</h3>
         <p>Claude Code e outros agentes com MCP abrem páginas na sua tela, tiram print para conferir e avisam quando terminam.</p>
       </article>
+      <article class="card reveal">
+        <span class="tile" aria-hidden="true"><svg class="ic"><use href="#i-notes"/></svg></span>
+        <h3>Anotações</h3>
+        <p>Uma aba de anotações em Markdown, com tags, fixar e lixeira. Salvas no servidor: abra em outro aparelho e encontre as mesmas notas.</p>
+      </article>
     </div>
 
     <div class="banner reveal">
@@ -1091,9 +1097,10 @@ Servidor rodando em http://localhost:3000
         <li><svg class="ic" aria-hidden="true"><use href="#i-camera"/></svg><code>screenshot</code><span>tira um print para o agente conferir o próprio trabalho.</span></li>
         <li><svg class="ic" aria-hidden="true"><use href="#i-filetext"/></svg><code>read_page</code><span>lê o conteúdo da página aberta.</span></li>
         <li><svg class="ic" aria-hidden="true"><use href="#i-folder"/></svg><code>open_folder</code><span>abre uma pasta no gerenciador de arquivos, inclusive do Drive.</span></li>
-        <li><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><code>notify</code><span>mostra um aviso na sua tela, como “build pronto”.</span></li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-bell"/></svg><code>notify</code><span>avisa na tela e manda notificação push pro celular, mesmo com o app fechado.</span></li>
       </ul>
       <p class="note">O agente também consegue listar as abas e as portas abertas.</p>
+      <p class="note">Além do terminal puro, tem um <strong>modo de conversa</strong> dedicado: escolha o agente, acompanhe o plano, os arquivos alterados (com diff) e o custo da conversa num painel ao lado. E no <strong>modo vibecoding</strong>, comece um projeto do zero com tela dividida — terminal de um lado, preview ao vivo do outro, atualizando sozinho a cada salvamento.</p>
     </div>
     <div class="reveal">
       <p class="sr-only">Exemplo: você pede ao agente “roda o projeto e abre no navegador pra eu ver”. Ele roda npm run dev, chama open_url com localhost:5173, confere com screenshot e avisa com notify. Uma aba nova com a página aparece sozinha no MeuTerminal.</p>
@@ -1243,6 +1250,7 @@ docker compose up -d --build</code></pre>
           <tr><th scope="row">Navegador para ver o localhost</th><td><svg class="ic v-yes" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Sim</span></td><td><span class="v-dep">depende<small>com túnel de porta</small></span></td><td><span class="v-dep">depende</span></td></tr>
           <tr><th scope="row">Gerenciador de arquivos + Google Drive</th><td><svg class="ic v-yes" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Sim</span></td><td><span class="v-dep">depende<small>SFTP, em geral sem Drive</small></span></td><td><span class="v-dep">depende</span></td></tr>
           <tr><th scope="row">Agentes de IA abrem abas na sua tela (MCP)</th><td><svg class="ic v-yes" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Sim</span></td><td><svg class="ic v-no" aria-hidden="true"><use href="#i-x"/></svg><span class="sr-only">Não</span></td><td><span class="v-dep">depende</span></td></tr>
+          <tr><th scope="row">Chat de agente com plano, diffs e custo visíveis</th><td><svg class="ic v-yes" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Sim</span></td><td><svg class="ic v-no" aria-hidden="true"><use href="#i-x"/></svg><span class="sr-only">Não</span></td><td><span class="v-dep">depende</span></td></tr>
           <tr><th scope="row">Self-hosted</th><td><svg class="ic v-yes" aria-hidden="true"><use href="#i-check"/></svg><span class="sr-only">Sim</span></td><td><span class="v-dep">depende<small>o app é um cliente</small></span></td><td><span class="v-dep">depende</span></td></tr>
         </tbody>
       </table>
@@ -1278,7 +1286,11 @@ docker compose up -d --build</code></pre>
       <div class="faq-item reveal"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa7" id="fq7">Funciona com Google Drive?<svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button></h3>
         <div class="faq-a" id="fa7" role="region" aria-labelledby="fq7" data-js-hide><p>Sim, via rclone. Google Drive, OneDrive, Dropbox, S3 e dezenas de outros aparecem no gerenciador de arquivos como “Nuvem”.</p></div></div>
       <div class="faq-item reveal"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa8" id="fq8">Quais agentes de IA funcionam?<svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button></h3>
-        <div class="faq-a" id="fa8" role="region" aria-labelledby="fq8" data-js-hide><p>O Claude Code já vem instalado na imagem Docker. Qualquer agente compatível com MCP por HTTP, como o Codex, pode usar as ferramentas do MeuTerminal.</p></div></div>
+        <div class="faq-a" id="fa8" role="region" aria-labelledby="fq8" data-js-hide><p>O Claude Code já vem instalado na imagem Docker. Qualquer agente compatível com MCP por HTTP, como o Codex, pode usar as ferramentas do MeuTerminal. Ao abrir uma nova conversa, você escolhe entre os agentes instalados numa tela só.</p></div></div>
+      <div class="faq-item reveal"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa13" id="fq13">Dá pra guardar anotações no app?<svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button></h3>
+        <div class="faq-a" id="fa13" role="region" aria-labelledby="fq13" data-js-hide><p>Sim, numa aba própria: título, texto em Markdown, tags, fixar no topo e lixeira. Salvas no servidor, então aparecem iguais em qualquer aparelho.</p></div></div>
+      <div class="faq-item reveal"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa14" id="fq14">O que é o modo vibecoding?<svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button></h3>
+        <div class="faq-a" id="fa14" role="region" aria-labelledby="fq14" data-js-hide><p>Um jeito de começar um projeto já em tela dividida: o terminal (com o agente de IA) de um lado e o preview ao vivo do projeto do outro, que recarrega sozinho a cada arquivo salvo.</p></div></div>
       <div class="faq-item reveal"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa9" id="fq9">Posso usar no computador também?<svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button></h3>
         <div class="faq-a" id="fa9" role="region" aria-labelledby="fq9" data-js-hide><p>Sim. No computador você tem atalhos de teclado, botão direito e arrastar e soltar. E as abas são as mesmas do celular.</p></div></div>
       <div class="faq-item reveal"><h3><button class="faq-q" type="button" aria-expanded="false" aria-controls="fa10" id="fq10">Perco meus arquivos ao atualizar?<svg class="ic" aria-hidden="true"><use href="#i-chev"/></svg></button></h3>
